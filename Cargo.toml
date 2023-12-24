@@ -1,13 +1,5 @@
-[package]
-name = "rust_learning_cargo"
-version = "0.1.0"
-edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-rand = "0.8.5"
-
-[[bin]]
-name = "guessing_game"
-path = "src/guessing_game/main.rs"
+[workspace]
+members = [
+    "hello_world",
+    "guessing_game"
+]
