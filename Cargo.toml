@@ -3,5 +3,6 @@ members = [
     "hello_world",
     "guessing_game",
     "fibonnaci",
-    "struct-code"
+    "struct-code",
+    "borrowing"
 ]
