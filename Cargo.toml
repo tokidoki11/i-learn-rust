@@ -4,5 +4,6 @@ members = [
     "guessing_game",
     "fibonnaci",
     "struct-code",
-    "borrowing"
+    "borrowing",
+    "state-pattern",
 ]
