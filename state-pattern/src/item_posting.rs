@@ -1,57 +1,12 @@
-trait State {
-    //note that rather than having self, &self, or &mut self as the first parameter of the method,
-    //we have self: Box<Self>. This syntax means the method is only valid when called on a Box holding the type. This syntax takes ownership of Box<Self>,
-    //invalidating the old state so the state value of the Post can transform into a new state
-    fn request_review(self: Box<Self>) -> Box<dyn State>;
-    fn approve(self: Box<Self>) -> Box<dyn State>;
-    fn reject(self: Box<Self>) -> Box<dyn State>;
-    fn content<'a>(&self, _post: &'a Post) -> &'a str {
-        ""
-    }
-}
+mod accepted;
+mod draft;
+mod pending_review;
+mod state;
 
-pub struct Draft {}
-pub struct PendingReview {}
-pub struct Accepted {}
-
-impl State for Draft {
-    fn request_review(self: Box<Self>) -> Box<dyn State> {
-        Box::new(PendingReview {})
-    }
-    fn approve(self: Box<Self>) -> Box<dyn State> {
-        self
-    }
-    fn reject(self: Box<Self>) -> Box<dyn State> {
-        self
-    }
-}
-
-impl State for PendingReview {
-    fn request_review(self: Box<Self>) -> Box<dyn State> {
-        self
-    }
-    fn approve(self: Box<Self>) -> Box<dyn State> {
-        Box::new(Accepted {})
-    }
-    fn reject(self: Box<Self>) -> Box<dyn State> {
-        Box::new(Draft {})
-    }
-}
-
-impl State for Accepted {
-    fn request_review(self: Box<Self>) -> Box<dyn State> {
-        self
-    }
-    fn approve(self: Box<Self>) -> Box<dyn State> {
-        self
-    }
-    fn reject(self: Box<Self>) -> Box<dyn State> {
-        Box::new(Draft {})
-    }
-    fn content<'a>(&self, post: &'a Post) -> &'a str {
-        &post.content
-    }
-}
+use accepted::Accepted;
+use draft::Draft;
+use pending_review::PendingReview;
+use state::State;
 
 pub struct Post {
     //we call the take method to take the Some value out of the state field and leave a None in its place, because Rust doesn’t let us have unpopulated fields in structs. This lets us move the state value out of Post rather than borrowing it.
