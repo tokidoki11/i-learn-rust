@@ -3,6 +3,10 @@ use std::collections::HashMap;
 
 pub struct Solution {}
 
+// lesson
+// 1. define dp function
+// 2. define reoccuring (line 21 -> on i, rob or not rob)
+// 3. define base case  (line 18 | 19 -> 1 house then rob, 2 houses then rob the max)
 impl Solution {
     pub fn rob(nums: Vec<i32>) -> i32 {
         let mut hash_map: HashMap<i32, i32> = HashMap::new();

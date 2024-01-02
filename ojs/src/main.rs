@@ -1,8 +1,8 @@
-mod knapsack;
+mod robber;
 
 fn knapsack() {
     let nums = vec![1, 2, 3, 1];
-    let result = knapsack::Solution::rob(nums);
+    let result = robber::Solution::rob(nums);
     println!("{}", result);
 }
 
