@@ -1,3 +1,4 @@
+mod delete_earn;
 mod min_cost;
 mod robber;
 mod tribonacci;
@@ -14,7 +15,19 @@ fn min_cost() {
     println!("{}", result);
 }
 
+fn tribonacci() {
+    let result = tribonacci::Solution::tribonacci(25);
+    println!("{}", result);
+}
+
+fn delete_earn() {
+    let nums = vec![2, 2, 3, 3, 3, 4];
+    let result = delete_earn::Solution::delete_and_earn(nums);
+    println!("{}", result);
+}
+
 fn main() {
     // robber();
-    min_cost()
+    // min_cost()
+    delete_earn();
 }
