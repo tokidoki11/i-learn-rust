@@ -1,5 +1,6 @@
 mod min_cost;
 mod robber;
+mod tribonacci;
 
 fn robber() {
     let nums = vec![1, 2, 1, 100, 1, 1];
