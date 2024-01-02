@@ -1,5 +1,6 @@
 mod delete_earn;
 mod min_cost;
+mod multiplication;
 mod robber;
 mod tribonacci;
 
@@ -26,8 +27,17 @@ fn delete_earn() {
     println!("{}", result);
 }
 
+fn multiplication() {
+    let nums = vec![-5, -3, -3, -2, 7, 1];
+    let multipliers = vec![-10, -5, 3, 4, 6];
+    let result = multiplication::Solution::maximum_score(nums, multipliers);
+    println!("{}", result);
+}
+
 fn main() {
     // robber();
     // min_cost()
-    delete_earn();
+    // delete_earn();
+    // tribonacci();
+    multiplication();
 }
