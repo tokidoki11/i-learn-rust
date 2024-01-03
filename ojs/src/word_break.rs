@@ -30,8 +30,12 @@ impl Solution {
                 let next_remaining = remaining.strip_prefix(word);
                 if let Some(s) = next_remaining {
                     let current = memo.get(remaining).unwrap_or(&false).clone();
+                    if current {
+                        break;
+                    }
+
                     let next = Self::word_break_dp(s, word_dict, memo);
-                    memo.insert(remaining, current || next);
+                    memo.insert(remaining, next);
                 }
             }
         }
