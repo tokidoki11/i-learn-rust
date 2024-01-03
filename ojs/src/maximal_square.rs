@@ -48,3 +48,32 @@ impl Solution {
         return memo[m][n];
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_maximal_square() {
+        let matrix = vec![
+            vec!['1', '0', '1', '0', '0'],
+            vec!['1', '0', '1', '1', '1'],
+            vec!['1', '1', '1', '1', '1'],
+            vec!['1', '0', '0', '1', '0'],
+        ];
+        let result = Solution::maximal_square(matrix);
+        assert_eq!(result, 4);
+    }
+    #[test]
+    fn test_maximal_square2() {
+        let matrix = vec![vec!['1', '0'], vec!['1', '1']];
+        let result = Solution::maximal_square(matrix);
+        assert_eq!(result, 1);
+    }
+    #[test]
+    fn test_maximal_square3() {
+        let matrix = vec![vec!['1']];
+        let result = Solution::maximal_square(matrix);
+        assert_eq!(result, 1);
+    }
+}

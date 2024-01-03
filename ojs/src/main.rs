@@ -2,6 +2,7 @@ mod delete_earn;
 mod longest_subsequence;
 mod maximal_square;
 mod min_cost;
+mod minimum_difficulty_job;
 mod multiplication;
 mod robber;
 mod tribonacci;
@@ -64,29 +65,4 @@ fn main() {
     // multiplication();
     // longest_subsequence();
     maximal_square();
-}
-
-#[cfg(test)]
-mod test {
-    use super::*;
-
-    #[test]
-    fn test_maximal_square() {
-        let matrix = vec![
-            vec!['1', '0', '1', '0', '0'],
-            vec!['1', '0', '1', '1', '1'],
-            vec!['1', '1', '1', '1', '1'],
-            vec!['1', '0', '0', '1', '0'],
-        ];
-        let result = Solution::maximal_square(matrix);
-        assert_eq!(result, 4);
-
-        let matrix = vec![vec!['1', '0'], vec!['1', '1']];
-        let result = Solution::maximal_square(matrix);
-        assert_eq!(result, 1);
-
-        let matrix = vec![vec!['1']];
-        let result = Solution::maximal_square(matrix);
-        assert_eq!(result, 1);
-    }
 }
