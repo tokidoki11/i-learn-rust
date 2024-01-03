@@ -13,7 +13,7 @@ The difficulty of a given day is the most difficult job that we did that day. Si
 if we are trying all the jobs we are allowed to do on that day (iterating through them),
 then we can use a variable hardest
 hardest to keep track of the difficulty of the hardest job done today.
-If we choose to do jobs up to the jthjth job (inclusive), where i≤j<n - (d - day)i≤j<n - (d - day) (as derived above),
+If we choose to do jobs up to the jth job (inclusive), where i≤j<n - (d - day)i≤j<n - (d - day) (as derived above),
 then that means on the next day, we start with the (j+1)th(j+1)th job. Therefore, our total difficulty is hardest + dp(j + 1, day + 1)hardest + dp(j + 1, day + 1).
 This gives us our scariest recurrence relation so far:
 
@@ -27,7 +27,7 @@ impl Solution {
         if job_difficulty.len() < d as usize {
             return -1;
         }
-        let mut memo = vec![vec![0; job_difficulty.len() + 1]; (d + 1) as usize];
+        let mut memo = vec![vec![-1; (d + 1) as usize]; job_difficulty.len()];
         Self::dp_min_dificulty(0, 1, &job_difficulty, &d, &mut memo)
     }
 
@@ -42,7 +42,7 @@ impl Solution {
             return jobs[i..].iter().max().unwrap().clone();
         }
 
-        if memo[i][current_day as usize] == 0 {
+        if memo[i][current_day as usize] == -1 {
             let remaining_day = d - current_day;
             let max_taken_job_idx = (jobs.len() - remaining_day as usize);
             let mut hardest = 0;
@@ -79,5 +79,29 @@ mod test {
         let jobs = vec![1, 1, 1];
         let result = Solution::min_difficulty(jobs, 3);
         assert_eq!(result, 3);
+    }
+
+    #[test]
+    fn test_minimum_difficulty_4() {
+        let jobs = vec![7, 1, 7, 1, 7, 1];
+        let result = Solution::min_difficulty(jobs, 3);
+        assert_eq!(result, 15);
+    }
+
+    #[test]
+    fn test_minimum_difficulty_5() {
+        let jobs = vec![
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ];
+        let result = Solution::min_difficulty(jobs, 10);
+        assert_eq!(result, 0);
     }
 }
