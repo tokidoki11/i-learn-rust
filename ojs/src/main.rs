@@ -7,6 +7,7 @@ mod minimum_difficulty_job;
 mod multiplication;
 mod robber;
 mod tribonacci;
+mod word_break;
 
 pub struct Solution {}
 
