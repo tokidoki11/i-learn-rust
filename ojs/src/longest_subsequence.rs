@@ -1,6 +1,6 @@
 use std::cmp::max;
 
-pub struct Solution {}
+use super::Solution;
 
 //https://www.enjoyalgorithms.com/blog/longest-common-subsequence
 // tle

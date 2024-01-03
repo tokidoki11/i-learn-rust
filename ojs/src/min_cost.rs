@@ -1,6 +1,6 @@
+pub use super::Solution;
 use std::cmp::min;
 use std::collections::HashMap;
-pub struct Solution {}
 
 /*
 1. define dp function

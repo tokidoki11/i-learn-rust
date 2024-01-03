@@ -1,7 +1,7 @@
 use std::cmp::max;
 use std::collections::HashMap;
 
-pub struct Solution {}
+pub use super::Solution;
 
 // lesson
 // 1. define dp function

@@ -1,6 +1,6 @@
 use std::cmp::max;
 
-pub struct Solution {}
+pub use super::Solution;
 
 // https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/
 impl Solution {
