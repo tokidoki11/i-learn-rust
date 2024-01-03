@@ -1,3 +1,4 @@
+mod coin_change;
 mod delete_earn;
 mod longest_subsequence;
 mod maximal_square;
