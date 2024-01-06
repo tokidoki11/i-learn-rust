@@ -22,13 +22,15 @@ impl Solution {
         }
 
         let mut memo: HashMap<(usize, i32), i32> = HashMap::new();
-        let result = Self::length_of_lis_dp(0, nums[0], &nums, &mut memo);
+        let result = Self::length_of_lis_dp(0, nums[0], nums[0], &nums, &mut memo);
         println!("{:?}", memo);
         result
     }
+
     fn length_of_lis_dp(
         idx: usize,
         current_number: i32,
+        minimum: i32,
         nums: &Vec<i32>,
         memo: &mut HashMap<(usize, i32), i32>,
     ) -> i32 {
@@ -40,15 +42,19 @@ impl Solution {
             let mut count = 1;
             for i in idx + 1..nums.len() {
                 let next_number = nums[i];
-                if current_number < next_number {
-                    let take = 1 + Self::length_of_lis_dp(i, next_number, nums, memo);
-                    let skip = Self::length_of_lis_dp(i, current_number, nums, memo);
+                if current_number < next_number && minimum < next_number {
+                    let take =
+                        1 + Self::length_of_lis_dp(i, next_number, current_number, nums, memo);
+                    let skip =
+                        Self::length_of_lis_dp(i, current_number, current_number, nums, memo);
                     let next = max(take, skip);
                     count = max(count, next);
                 } else {
-                    let take = Self::length_of_lis_dp(i, next_number, nums, memo);
-                    let skip = Self::length_of_lis_dp(i, current_number, nums, memo);
+                    let take = Self::length_of_lis_dp(i, next_number, current_number, nums, memo);
+                    let skip =
+                        Self::length_of_lis_dp(i, current_number, current_number, nums, memo);
                     let next = max(take, skip);
+
                     count = max(count, next);
                 }
             }
@@ -93,8 +99,18 @@ mod test {
 
     #[test]
     fn test_length_of_lis_5() {
-        let nums = vec![4, 10, 4, 3, 8, 9];
+        let nums = vec![4, 10, 3, 8, 9];
         let result = Solution::length_of_lis(nums);
+        //[4, 10, 3, 8, 9]
+        //{(3, 10): 1, (3, 4): 2, (3, 8): 2, (2, 3): 3, (1, 4): 3, (3, 3): 2, (2, 4): 3, (1, 10): 3, (0, 4): 4, (2, 10): 2}
+        // 1,10 OK , 0,4 get 1 + 3 = 4 (wrong), got no context that smallest possible is 4
         assert_eq!(result, 3);
+    }
+
+    #[test]
+    fn test_length_of_lis_6() {
+        let nums = vec![0, 1, 0, 3, 2, 3];
+        let result = Solution::length_of_lis(nums);
+        assert_eq!(result, 4);
     }
 }
